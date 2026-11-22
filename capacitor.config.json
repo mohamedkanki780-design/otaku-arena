@@ -1,0 +1,9 @@
+{
+  "appId": "com.otakuarena.app",
+  "appName": "OTAKU ARENA",
+  "webDir": "www",
+  "backgroundColor": "#0A0612",
+  "android": {
+    "allowMixedContent": false
+  }
+}

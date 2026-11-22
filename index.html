@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OTAKU ARENA</title>
+<meta name="theme-color" content="#0A0612">
+<meta name="description" content="OTAKU ARENA: دليل الأنمي بالعربي مع روابط مشاهدة قانونية ومجانية.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OTAKU ARENA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;600;700&family=Chakra+Petch:wght@600;700&display=swap">
+<style>html{background:#0A0612}
+/* Layout: عمود تطبيق واحد بعرض أقصى 480px، شريط تبويب سفلي ثابت، تصميم داكن بنفسجي ملتزم بنمط واحد */
+:root{
+  --bg:#0A0612; --surface:#140D21; --surface2:#1D1331; --line:#2B1F47;
+  --fg:#F3EEFB; --muted:#A79CC2; --accent:#8B5CF6; --accent2:#C4A1FF; --on-accent:#0A0612; --warn:#F5C451;
+  --font-ar:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
+  --font-head:"Readex Pro","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --font-brand:"Chakra Petch","Arial Narrow",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--fg); direction:rtl;
+  font:15px/1.75 var(--font-ar);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:inherit}
+a{color:var(--accent2)}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;border-radius:8px}
+h1,h2,h3{font-family:var(--font-head);line-height:1.35;margin:0;text-wrap:balance}
+p{margin:0}
+.shell{max-width:480px;margin:0 auto;padding-bottom:104px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{font:700 21px/1 var(--font-brand);letter-spacing:.14em;direction:ltr;display:flex;gap:.45em}
+.brand i{font-style:normal;color:var(--accent2)}
+.pill{font-size:12px;font-weight:600;color:var(--accent2);border:1px solid var(--line);background:var(--surface);padding:3px 10px;border-radius:99px;white-space:nowrap}
+
+/* sections */
+.sec{margin-top:26px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px}
+.sec-h h2{font-size:18px}
+.sec-h small{color:var(--muted)}
+.page-h{font-size:24px;margin:6px 0 14px}
+
+/* covers (مولَّدة بالكود) */
+.cover{position:relative;aspect-ratio:2/3;border-radius:14px;overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 80% 0%,hsl(calc(var(--h) + 24) 80% 55% / .55),transparent 60%),
+    linear-gradient(165deg,hsl(var(--h) 62% 34%),hsl(calc(var(--h) + 18) 55% 9%));
+  border:1px solid var(--line);display:grid;place-items:center}
+.cover span{font:700 64px/1 var(--font-brand);color:#fff;opacity:.22;direction:ltr}
+.cover.sm{width:58px;aspect-ratio:2/3;flex:none;border-radius:10px}
+.cover.sm span{font-size:26px}
+
+/* cards rail */
+.rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.card{flex:none;width:128px;scroll-snap-align:start;display:flex;flex-direction:column;gap:2px}
+.card b{font:600 14px/1.4 var(--font-head);margin-top:6px;display:block}
+.card small{color:var(--muted);font-size:12px}
+.card:active .cover,.row:active{transform:scale(.98)}
+
+/* hero */
+.hero{position:relative;display:block;width:100%;border-radius:20px;overflow:hidden;min-height:250px;
+  background:
+    radial-gradient(90% 90% at 85% 0%,hsl(285 85% 58% / .55),transparent 60%),
+    linear-gradient(160deg,#3b1a78,#0d0720 78%);
+  border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.hero .big{position:absolute;inset-inline-start:-6px;top:-18px;font:700 190px/1 var(--font-brand);color:#fff;opacity:.07;direction:ltr}
+.hero .tag{align-self:flex-start;font-size:12px;font-weight:600;background:var(--accent);color:var(--on-accent);padding:2px 10px;border-radius:99px}
+.hero h1{font-size:26px}
+.hero p{color:#d9cdf2;font-size:14px;max-width:34ch}
+.cta{align-self:flex-start;margin-top:6px;background:var(--fg);color:var(--bg);font-weight:600;padding:9px 18px;border-radius:12px}
+
+/* rows */
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:10px;border-radius:14px;background:var(--surface);border:1px solid var(--line);margin-bottom:10px}
+.row>div{min-width:0;flex:1;display:flex;flex-direction:column}
+.row b{font:600 15px/1.4 var(--font-head)}
+.row small{color:var(--muted);font-size:12px;direction:rtl;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row svg.hm{color:var(--accent2);flex:none}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:5px 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface);font-size:13px;color:var(--muted)}
+.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
+.chips.scroll{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px;padding-bottom:4px}
+.chips.scroll::-webkit-scrollbar{display:none}
+.chips.scroll .chip{flex:none}
+
+/* search */
+.search{position:relative;margin-bottom:12px}
+.search input{width:100%;padding:12px 44px 12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit}
+.search input::placeholder{color:var(--muted)}
+.search svg{position:absolute;inset-inline-start:auto;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.count{color:var(--muted);font-size:13px;margin:14px 0 10px}
+
+/* categories */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gcard{padding:16px;border-radius:16px;border:1px solid var(--line);min-height:92px;display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(150deg,hsl(var(--h) 55% 24%),hsl(var(--h) 50% 10%))}
+.gcard b{font:600 17px var(--font-head)}
+.gcard small{color:#cfc3ea}
+
+/* ads */
+.ad{margin:16px 0;border:1px dashed #4a3a75;border-radius:12px;background:repeating-linear-gradient(135deg,transparent 0 10px,#ffffff06 10px 20px);
+  min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--muted);font-size:12px}
+.ad em{font-style:normal;font-weight:600;color:var(--warn);font-size:11px;letter-spacing:.04em}
+
+/* info panels */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
+.panel h3{font-size:16px;margin-bottom:6px}
+.panel p{color:var(--muted);font-size:14px}
+.links{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.lk{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:12px;background:var(--surface2);border:1px solid var(--line);text-decoration:none;color:var(--fg);font-weight:500}
+.lk small{color:var(--muted);font-weight:400}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+
+/* news */
+.news{display:flex;flex-direction:column;gap:10px}
+.nitem{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.nitem small{display:inline-block;font-size:11px;font-weight:600;color:var(--warn);border:1px solid #5a4a1f;border-radius:99px;padding:0 8px;margin-bottom:6px}
+.nitem h3{font-size:16px;margin-bottom:4px}
+.nitem p{color:var(--muted);font-size:14px}
+
+/* detail */
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--accent2);font-weight:600;padding:4px 0 10px}
+.dhead{display:flex;gap:16px;align-items:flex-end}
+.dhead .cover{width:118px;flex:none}
+.dhead>div{min-width:0}
+.dhead h1{font-size:22px}
+.en{color:var(--muted);font-size:13px;direction:ltr;text-align:right;margin-top:2px}
+.meta{color:var(--muted);font-size:13px;margin-top:6px}
+.actions{display:flex;gap:10px;margin:16px 0 4px}
+.btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 14px;border-radius:12px;font-weight:600;border:1px solid var(--line);background:var(--surface)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn[aria-pressed=true]{border-color:var(--accent2);color:var(--accent2)}
+.syn{margin-top:16px;color:#ddd3f1}
+.stars{display:flex;gap:4px;direction:ltr;justify-content:flex-end}
+.stars button{padding:4px;color:#4a3d6b}
+.stars button.on{color:var(--warn)}
+.rate-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rate-row span{font-weight:500}
+
+/* comments */
+.cform{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.cform input,.cform textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface2);color:var(--fg);font:inherit}
+.cform textarea{min-height:76px;resize:vertical}
+.cform .btn{flex:none;align-self:flex-start;padding-inline:22px}
+.cm{border-top:1px solid var(--line);padding:12px 0}
+.cm b{font-size:14px}
+.cm time{color:var(--muted);font-size:12px;margin-inline-start:8px}
+.cm p{color:#ddd3f1;margin-top:2px;overflow-wrap:anywhere}
+.empty{text-align:center;padding:40px 16px;color:var(--muted)}
+.empty svg{color:var(--accent);margin-bottom:8px}
+.empty h3{color:var(--fg);font-size:18px;margin-bottom:4px}
+.empty .btn{display:inline-flex;margin-top:14px;flex:none}
+
+/* tab bar */
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,480px);z-index:6;
+  display:grid;grid-template-columns:repeat(5,1fr);background:var(--surface);border-top:1px solid var(--line);
+  padding:6px max(4px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(4px,env(safe-area-inset-left,0px))}
+.tabs button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:var(--muted);font-size:11px;font-weight:500;text-align:center}
+.tabs button[aria-current=page]{color:var(--accent2)}
+.tabs button[aria-current=page] svg{filter:drop-shadow(0 0 6px #8b5cf6aa)}
+.foot{margin-top:28px;text-align:center;color:var(--muted);font-size:12px}
+
+@media (prefers-reduced-motion:no-preference){
+  .row,.cover{transition:transform .12s ease}
+}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ad iframe{border:0;width:100%;display:block;border-radius:10px;color-scheme:normal}.ad[data-filled]{border:0;background:none;padding:0}
+</style></head><body>
+<div id="app" lang="ar" dir="rtl">
+  <div class="shell">
+    <header class="top">
+      <div class="brand" aria-label="OTAKU ARENA"><span>OTAKU</span><i>ARENA</i></div>
+      <span class="pill">مشاهدة مجانية</span>
+    </header>
+    <main id="view"></main>
+  </div>
+  <nav class="tabs" aria-label="التنقل الرئيسي" id="tabs"></nav>
+</div>
+<script>
+(function(){
+"use strict";
+/* ====== إعدادات الإعلانات ======
+   1) سجّل في شبكة إعلانات تدعم التطبيقات/الويب (مثل Adsterra أو Monetag).
+   2) الصق كود البانر في banner بين علامتي الاقتباس المائلة.
+   3) غيّر enabled إلى true وحدّد height حسب مقاس البانر (مثلاً 100 أو 250).
+   الإعلانات تُعرض داخل iframe معزول حتى لا يؤثر كود الشبكة على التطبيق. */
+var ADS={enabled:false,height:100,banner:``};
+
+/* ---------- بيانات ---------- */
+var ANIME=[
+ {id:1,t:"Fullmetal Alchemist: Brotherhood",ar:"الخيميائي المعدني: الأخوّة",y:2009,type:"مسلسل",g:["أكشن","مغامرة","فانتازيا","دراما"],h:268,
+  s:"أخوان يفقدان جزءًا من جسديهما بعد محاولة محرّمة في الخيمياء، فيخرجان في رحلة للبحث عن حجر الفلاسفة واستعادة ما فقداه."},
+ {id:2,t:"Attack on Titan",ar:"هجوم العمالقة",y:2013,type:"مسلسل",g:["أكشن","دراما","غموض"],h:292,
+  s:"تعيش البشرية خلف أسوار عالية خوفًا من العمالقة. حين تنهار الأسوار، يقرر شاب الانضمام إلى الجيش لمواجهة التهديد وكشف حقيقة العالم."},
+ {id:3,t:"Death Note",ar:"مذكرة الموت",y:2006,type:"مسلسل",g:["غموض","إثارة","خارق"],h:305,
+  s:"طالب متفوق يعثر على دفتر يقتل كل من يُكتب اسمه فيه، فيبدأ صراعًا ذهنيًا مع محقق غامض."},
+ {id:4,t:"Demon Slayer",ar:"قاتل الشياطين",y:2019,type:"مسلسل",g:["أكشن","فانتازيا","مغامرة"],h:276,
+  s:"بعد مقتل عائلته وتحوّل أخته إلى شيطانة، يتدرب فتى ليصبح صائد شياطين ويبحث عن علاج لها."},
+ {id:5,t:"One Punch Man",ar:"الرجل ذو اللكمة الواحدة",y:2015,type:"مسلسل",g:["أكشن","كوميديا","خارق"],h:255,
+  s:"بطل يهزم أي خصم بلكمة واحدة، لكنه يعاني من الملل وغياب التحدي الحقيقي."},
+ {id:6,t:"Spy x Family",ar:"سباي × فاميلي",y:2022,type:"مسلسل",g:["كوميديا","أكشن","عائلي"],h:312,
+  s:"جاسوس وقاتلة مأجورة وطفلة تقرأ الأفكار يشكّلون عائلة مزيفة، وكل منهم يخفي سره عن الآخرين."},
+ {id:7,t:"Jujutsu Kaisen",ar:"جوجوتسو كايسن",y:2020,type:"مسلسل",g:["أكشن","خارق","فانتازيا"],h:262,
+  s:"طالب يبتلع إصبعًا ملعونًا فيتشارك جسده مع لعنة قوية، وينضم إلى مدرسة متخصصة في محاربة اللعنات."},
+ {id:8,t:"Steins;Gate",ar:"ستاينز؛ غيت",y:2011,type:"مسلسل",g:["خيال علمي","إثارة","دراما"],h:285,
+  s:"مجموعة أصدقاء تكتشف طريقة لإرسال رسائل إلى الماضي، وتتحول التجربة إلى سباق مع الزمن لتصحيح العواقب."},
+ {id:9,t:"Cowboy Bebop",ar:"كاوبوي بيبوب",y:1998,type:"مسلسل",g:["خيال علمي","أكشن","مغامرة"],h:298,
+  s:"صائدو جوائز يجوبون المجرة في مطاردات مليئة بالموسيقى والماضي الذي لا يرحمهم."},
+ {id:10,t:"Haikyu!!",ar:"هايكيو!!",y:2014,type:"مسلسل",g:["رياضة","دراما","كوميديا"],h:272,
+  s:"فتى قصير القامة يحلم بالتألق في كرة الطائرة، فيلتحق بمدرسة ثانوية لها تاريخ عريق في اللعبة."},
+ {id:11,t:"Frieren: Beyond Journey's End",ar:"فريرن: ما بعد رحلة النهاية",y:2023,type:"مسلسل",g:["فانتازيا","دراما","مغامرة"],h:258,
+  s:"ساحرة طويلة العمر تنطلق في رحلة جديدة بعد رحيل رفيقها البطل، لتفهم البشر الذين لم تدركهم وهم بجانبها."},
+ {id:12,t:"Violet Evergarden",ar:"فيوليت إيفرغاردن",y:2018,type:"مسلسل",g:["دراما","فانتازيا","رومانسي"],h:318,
+  s:"جندية سابقة تعمل ككاتبة رسائل، وتحاول فهم معنى كلمات الحب التي قالها لها قائدها."},
+ {id:13,t:"Your Name.",ar:"اسمك",y:2016,type:"فيلم",g:["رومانسي","دراما","خيال علمي"],h:290,
+  s:"فتى وفتاة لا يعرفان بعضهما يتبادلان أجسادهما في أحلامهم، ويحاولان الوصول إلى بعضهما قبل أن تتلاشى الذكرى."}
+];
+var NEWS=[
+ {h:"دليل المبتدئين: من أين تبدأ مشاهدة الأنمي؟",p:"ابدأ بعمل مكتمل وقصير نسبيًا، ثم انتقل إلى النوع الذي أعجبك. اختيار النوع أهم من اختيار الأشهر."},
+ {h:"كيف تعرف أن منصة المشاهدة قانونية؟",p:"المنصة القانونية تعرض اسم الاستوديو أو الناشر الرسمي، وتتعاون مع قنوات مرخّصة، ولا تطلب منك تحميل برامج مجهولة."},
+ {h:"أفلام أنمي تُشاهد في ليلة واحدة",p:"إن لم يكن لديك وقت لموسم كامل، فالأفلام طريقة جيدة لتجربة أسلوب مخرج أو استوديو قبل الالتزام بمسلسل."},
+ {h:"كيف تتابع حلقات الموسم الأسبوعية؟",p:"أضف الأعمال التي تتابعها إلى المفضلة، وراجع قائمتك كل أسبوع بدل البحث من جديد."}
+];
+var LEGAL=[
+ {n:"Muse Asia على يوتيوب",d:"قناة رسمية تعرض أعمالًا مرخّصة",u:"https://www.youtube.com/@MuseAsia"},
+ {n:"Ani-One Asia على يوتيوب",d:"قناة رسمية تعرض أعمالًا مرخّصة",u:"https://www.youtube.com/@AniOneAsia"}
+];
+var GMAP={"Action":"أكشن","Adventure":"مغامرة","Comedy":"كوميديا","Drama":"دراما","Fantasy":"فانتازيا","Horror":"رعب","Mahou Shoujo":"سحر","Mecha":"ميكا","Music":"موسيقى","Mystery":"غموض","Psychological":"نفسي","Romance":"رومانسي","Sci-Fi":"خيال علمي","Slice of Life":"شريحة من الحياة","Sports":"رياضة","Supernatural":"خارق","Thriller":"إثارة"};
+var GREV={},G=[];
+Object.keys(GMAP).forEach(function(k){GREV[GMAP[k]]=k;G.push(GMAP[k]);});
+ANIME.forEach(function(a){a.g.forEach(function(x){if(G.indexOf(x)<0)G.push(x);});});
+
+/* ---------- تخزين خفيف على الجهاز ---------- */
+var store={
+ get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},
+ set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+};
+var S={tab:"home",open:null,q:"",genre:null,trend:[],top:[],rres:[],rkey:"",loading:false,err:false,
+ favs:store.get("oa_favs",[]),rates:store.get("oa_rate",{}),coms:store.get("oa_com",{}),name:store.get("oa_name","")};
+
+/* ---------- أدوات ---------- */
+var view=document.getElementById("view"), tabsEl=document.getElementById("tabs");
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+var REG={}; ANIME.forEach(function(a){REG[a.id]=a;});
+store.get("oa_favitems",[]).forEach(function(a){if(a&&a.id&&!REG[a.id])REG[a.id]=a;});
+function byId(id){return REG[id];}
+function ic(name,sz){
+ sz=sz||22;
+ var p={
+  home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  news:'<path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 13h5"/>',
+  heart:'<path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/>',
+  back:'<path d="M9 6l6 6-6 6"/>',
+  ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  play:'<path d="M7 4l13 8-13 8z"/>'
+ };
+ return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p[name]+'</svg>';
+}
+function icFill(name,sz){return ic(name,sz).replace('fill="none"','fill="currentColor"');}
+function cover(a,cls){return '<div class="cover '+(cls||"")+'" style="--h:'+a.h+'" aria-hidden="true"><span>'+esc(a.t.charAt(0))+'</span>'+(a.img?'<img src="'+esc(a.img)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">':'')+'</div>';}
+function card(a){return '<button class="card" data-open="'+a.id+'">'+cover(a)+'<b>'+esc(a.ar)+'</b><small>'+a.y+' · '+esc(a.g[0])+'</small></button>';}
+function row(a){
+ var fav=S.favs.indexOf(a.id)>=0;
+ return '<button class="row" data-open="'+a.id+'">'+cover(a,"sm")+'<div><b>'+esc(a.ar)+'</b>'+(a.ar!==a.t?'<small>'+esc(a.t)+'</small>':'')+'<small>'+a.y+' · '+esc(a.type)+' · '+esc(a.g.slice(0,3).join(" · "))+'</small></div>'+(fav?'<span class="hm">'+icFill("heart",18)+'</span>':'')+'</button>';
+}
+function ad(label){return '<aside class="ad" aria-label="إعلان" data-ad><em>إعلان</em><span>مساحة إعلان '+esc(label)+'</span></aside>';}
+function fillAds(){
+ if(!ADS.enabled||!ADS.banner)return;
+ var n=document.querySelectorAll("[data-ad]:not([data-filled])");
+ for(var i=0;i<n.length;i++){
+  var f=document.createElement("iframe");
+  f.setAttribute("sandbox","allow-scripts allow-popups allow-popups-to-escape-sandbox");
+  f.setAttribute("title","إعلان");f.setAttribute("loading","lazy");
+  f.style.height=ADS.height+"px";
+  f.srcdoc='<!doctype html><body style="margin:0;display:flex;justify-content:center;background:transparent">'+ADS.banner+'</body>';
+  n[i].innerHTML="";n[i].appendChild(f);n[i].setAttribute("data-filled","1");
+ }
+}
+function list(items){
+ return items.map(function(a,i){return row(a)+(((i+1)%6===0&&i<items.length-1)?ad("داخل القائمة"):"");}).join("");
+}
+function legalLinks(extra){
+ var h='<div class="links">';
+ LEGAL.forEach(function(l){h+='<a class="lk" href="'+l.u+'" target="_blank" rel="noopener noreferrer"><span>'+esc(l.n)+'<br><small>'+esc(l.d)+'</small></span>'+ic("ext",18)+'</a>';});
+ if(extra)h+=extra;
+ return h+'</div>';
+}
+
+/* ---------- بيانات AniList (قاعدة أنمي عالمية) ---------- */
+var F="id title{romaji english} format seasonYear startDate{year} genres description(asHtml:false) averageScore coverImage{large color}";
+function hueOf(hex){var r=parseInt(hex.slice(1,3),16)/255,g=parseInt(hex.slice(3,5),16)/255,b=parseInt(hex.slice(5,7),16)/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn,h=0;if(d){if(mx===r)h=((g-b)/d)%6;else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;}h=Math.round(h*60);return h<0?h+360:h;}
+function mapMedia(m){
+ var id=1000+m.id; if(REG[id])return REG[id];
+ var t=(m.title&&(m.title.english||m.title.romaji))||"—", t2=(m.title&&m.title.romaji)||"";
+ var g=(m.genres||[]).map(function(x){return GMAP[x]||null;}).filter(Boolean); if(!g.length)g=["أنمي"];
+ var fm={MOVIE:"فيلم",TV:"مسلسل",TV_SHORT:"مسلسل قصير",OVA:"أوفا",ONA:"ويب",SPECIAL:"خاص",MUSIC:"موسيقى"};
+ var c=m.coverImage||{}, h=m.id%360; if(/^#[0-9a-f]{6}$/i.test(c.color||""))h=hueOf(c.color);
+ var d=(m.description||"").replace(/<br\s*\/?>/gi," ").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
+ if(d.length>420)d=d.slice(0,417)+"…";
+ var a={id:id,t:t,t2:t2,ar:t,y:m.seasonYear||(m.startDate&&m.startDate.year)||"—",type:fm[m.format]||"أنمي",g:g,h:h,s:d||"لا يوجد وصف متاح.",img:c.large||"",sc:m.averageScore||0,remote:true};
+ REG[id]=a; return a;
+}
+function gql(q,v){
+ return fetch("https://graphql.anilist.co",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({query:q,variables:v||{}})})
+ .then(function(r){if(!r.ok)throw new Error("http");return r.json();})
+ .then(function(j){if(j.errors)throw new Error("gql");return j.data;});
+}
+function loadHome(){
+ var q="query{t:Page(perPage:12){media(type:ANIME,isAdult:false,sort:TRENDING_DESC){"+F+"}} p:Page(perPage:12){media(type:ANIME,isAdult:false,sort:SCORE_DESC,format_in:[TV,MOVIE]){"+F+"}}}";
+ gql(q).then(function(d){S.trend=d.t.media.map(mapMedia);S.top=d.p.media.map(mapMedia);if(!S.open&&S.tab==="home")render();}).catch(function(){});
+}
+var stimer=null;
+function skey(){return S.q.trim().toLowerCase()+"|"+(S.genre||"");}
+function refreshRes(){var el=document.getElementById("res");if(el){el.innerHTML=results();fillAds();}}
+function loadSearch(){
+ var key=skey(), q=S.q.trim(), g=S.genre?GREV[S.genre]:null;
+ if((!q&&!g)||(q&&/[\u0600-\u06FF]/.test(q))||(S.genre&&!g)){S.rkey=key;S.rres=[];S.loading=false;S.err=false;refreshRes();return;}
+ if(S.rkey===key&&!S.err){refreshRes();return;}
+ S.loading=true;refreshRes();
+ var v={sort:[q?"SEARCH_MATCH":"POPULARITY_DESC"]}; if(q)v.s=q; if(g)v.g=g;
+ gql("query($s:String,$g:String,$sort:[MediaSort]){Page(perPage:20){media(type:ANIME,isAdult:false,search:$s,genre:$g,sort:$sort){"+F+"}}}",v)
+ .then(function(d){if(skey()!==key)return;S.rkey=key;S.rres=d.Page.media.map(mapMedia);S.loading=false;S.err=false;refreshRes();})
+ .catch(function(){if(skey()!==key)return;S.loading=false;S.err=true;refreshRes();});
+}
+function railSec(h,items){return '<section class="sec"><div class="sec-h"><h2>'+h+'</h2></div><div class="rail">'+items.map(card).join("")+'</div></section>';}
+
+/* ---------- الشاشات ---------- */
+function home(){
+ var f=byId(6);
+ var trending=[1,2,4,7,11,6].map(byId), classics=[3,9,8,1,5].map(byId);
+ return ''+
+ '<button class="hero" data-open="6"><span class="big" aria-hidden="true">S</span><span class="tag">مختار اليوم</span><h1>'+esc(f.ar)+'</h1><p>'+esc(f.s)+'</p><span class="cta">التفاصيل وأين تشاهد</span></button>'+
+ '<section class="sec"><div class="sec-h"><h2>الأكثر متابعة</h2></div><div class="rail">'+trending.map(card).join("")+'</div></section>'+
+ ad("بانر 320×100")+
+ (S.trend.length?railSec("رائج الآن",S.trend):"")+(S.top.length?railSec("الأعلى تقييمًا",S.top):"")+
+ '<section class="sec"><div class="sec-h"><h2>كلاسيكيات لا تفوّت</h2></div><div class="rail">'+classics.map(card).join("")+'</div></section>'+
+ '<section class="sec"><div class="panel"><h3>مشاهدة قانونية ومجانية</h3><p>التطبيق لا يستضيف حلقات ولا يرفعها. نوجّهك إلى القنوات والمنصات الرسمية التي تعرض الأعمال بترخيص، فتدعم صنّاعها.</p>'+legalLinks()+'<p class="note">توفّر الأعمال يختلف حسب بلدك. جرّب أيضًا زر «أين تشاهد» داخل صفحة كل عمل.</p></div></section>'+
+ '<section class="sec"><div class="sec-h"><h2>مقالات</h2><button class="chip" data-tab="news">كل المقالات</button></div><div class="news">'+NEWS.slice(0,2).map(newsItem).join("")+'</div></section>'+
+ '<p class="foot">OTAKU ARENA دليل لا يستضيف الحلقات. <a href="privacy.html">سياسة الخصوصية</a><br>بيانات الأعمال وصورها من AniList.</p>'; 
+}
+function newsItem(n){return '<article class="nitem"><small>مقال إرشادي</small><h3>'+esc(n.h)+'</h3><p>'+esc(n.p)+'</p></article>';}
+
+function normalizeSearch(value){
+ return String(value||"").toLowerCase()
+  .replace(/[\u064B-\u065F\u0670\u0640]/g,"")
+  .replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه")
+  .replace(/ؤ/g,"و").replace(/ئ/g,"ي").trim();
+}
+function filtered(){
+ var q=normalizeSearch(S.q);
+ return ANIME.filter(function(a){
+  if(S.genre&&a.g.indexOf(S.genre)<0)return false;
+  if(!q)return true;
+  return normalizeSearch(a.t).indexOf(q)>=0||normalizeSearch(a.ar).indexOf(q)>=0;
+ });
+}
+function results(){
+ var key=skey(), q=S.q.trim(), loc=filtered(), rem=[];
+ if(S.rkey===key)rem=S.rres; else if(!q&&!S.genre)rem=S.trend;
+ var seen={}; loc.forEach(function(a){seen[a.t.toLowerCase()]=1;});
+ rem=rem.filter(function(a){return !seen[a.t.toLowerCase()]&&!(a.t2&&seen[a.t2.toLowerCase()]);});
+ var all=loc.concat(rem);
+ var msg=S.loading?'<p class="note">جارٍ البحث في قاعدة AniList…</p>':((S.err&&(q||S.genre))?'<p class="note">تعذّر الاتصال بالإنترنت، تظهر النتائج المحلية فقط.</p>':'');
+ if(!all.length)return msg+'<div class="empty"><h3>لا نتائج</h3><p>جرّب كلمة أخرى (البحث الموسّع يدعم الإنجليزية) أو اختر «الكل».</p></div>';
+ return '<p class="count">'+all.length+' عمل</p>'+msg+list(all);
+}
+function search(){
+ var chips='<button class="chip" data-genre="" aria-pressed="'+(!S.genre)+'">الكل</button>'+G.map(function(g){return '<button class="chip" data-genre="'+esc(g)+'" aria-pressed="'+(S.genre===g)+'">'+esc(g)+'</button>';}).join("");
+ return '<h1 class="page-h">بحث</h1>'+
+ '<div class="search">'+ic("search",20)+'<input id="q" type="search" placeholder="ابحث بالاسم العربي أو الإنجليزي" value="'+esc(S.q)+'" autocomplete="off" aria-label="بحث"></div>'+
+ '<div class="chips scroll">'+chips+'</div><div id="res">'+results()+'</div>';
+}
+function cats(){
+ return '<h1 class="page-h">التصنيفات</h1><div class="grid">'+G.map(function(g,i){
+  var n=ANIME.filter(function(a){return a.g.indexOf(g)>=0;}).length;
+  return '<button class="gcard" style="--h:'+(250+(i*13)%75)+'" data-cat="'+esc(g)+'"><b>'+esc(g)+'</b><small>تصفّح</small></button>';
+ }).join("")+'</div>'+ad("بانر 320×100");
+}
+function news(){
+ return '<h1 class="page-h">مقالات إرشادية</h1><div class="news">'+NEWS.map(newsItem).join("")+'</div>'+
+ '<p class="note">محتوى إرشادي ثابت، وليس موجز أخبار مباشرًا.</p>'+ad("بانر 320×100");
+}
+function favs(){
+ var items=S.favs.map(byId).filter(Boolean);
+ if(!items.length)return '<h1 class="page-h">المفضلة</h1><div class="empty">'+ic("heart",40)+'<h3>قائمتك فارغة</h3><p>اضغط «أضف للمفضلة» في صفحة أي عمل ليظهر هنا.</p><button class="btn primary" data-tab="home">تصفّح الأعمال</button></div>';
+ return '<h1 class="page-h">المفضلة</h1><p class="count">'+items.length+' عمل</p>'+list(items);
+}
+
+function stars(id){
+ var r=S.rates[id]||0, h="";
+ for(var i=1;i<=5;i++)h+='<button class="'+(i<=r?"on":"")+'" data-rate="'+i+'" aria-label="'+i+' من 5" aria-pressed="'+(i===r)+'">'+(i<=r?icFill("star",28):ic("star",28))+'</button>';
+ return h;
+}
+function comments(id){
+ var c=S.coms[id]||[];
+ var h='<section class="sec"><div class="sec-h"><h2>التعليقات</h2><small>'+c.length+'</small></div>'+
+ '<form class="cform" id="cform"><label for="cn" class="count" style="margin:0">اسمك</label><input id="cn" maxlength="24" placeholder="اسم العرض" value="'+esc(S.name)+'" required>'+
+ '<label for="ct" class="count" style="margin:0">تعليقك</label><textarea id="ct" maxlength="400" placeholder="ما رأيك في هذا العمل؟ تجنّب حرق الأحداث" required></textarea>'+
+ '<button class="btn primary" type="submit">نشر التعليق</button></form>';
+ if(!c.length)h+='<p class="note">لا تعليقات بعد. كن أول من يعلّق.</p>';
+ c.forEach(function(x){h+='<div class="cm"><b>'+esc(x.n)+'</b><time>'+esc(x.d)+'</time><p>'+esc(x.t)+'</p></div>';});
+ return h+'<p class="note">التعليقات محفوظة على جهازك في هذه النسخة التجريبية. لمشاركتها بين المستخدمين يلزم خادم (مثل Firebase أو Supabase).</p></section>';
+}
+function detail(){
+ var a=byId(S.open), fav=S.favs.indexOf(a.id)>=0;
+ var jw='https://www.justwatch.com/eg/search?q='+encodeURIComponent(a.t);
+ return ''+
+ '<button class="back" data-back>'+ic("back",18)+'رجوع</button>'+
+ '<div class="dhead">'+cover(a)+'<div><h1>'+esc(a.ar)+'</h1>'+(a.ar!==a.t?'<p class="en">'+esc(a.t)+'</p>':(a.t2&&a.t2!==a.t?'<p class="en">'+esc(a.t2)+'</p>':''))+'<p class="meta">'+a.y+' · '+esc(a.type)+'</p></div></div>'+
+ '<div class="chips" style="margin-top:14px">'+a.g.map(function(g){return '<span class="chip">'+esc(g)+'</span>';}).join("")+'</div>'+
+ '<div class="actions"><button class="btn" data-fav aria-pressed="'+fav+'">'+(fav?icFill("heart",20):ic("heart",20))+(fav?"في المفضلة":"أضف للمفضلة")+'</button></div>'+
+ '<p class="syn">'+esc(a.s)+'</p>'+(a.remote?'<p class="note">الوصف بالإنجليزية من AniList'+(a.sc?' · تقييم الجمهور '+a.sc+'%':'')+'</p>':'')+
+ '<section class="sec"><div class="panel"><h3>أين تشاهد قانونيًا؟</h3><p>اعرف المنصات المرخّصة التي تعرض هذا العمل في بلدك، أو تصفّح القنوات الرسمية المجانية.</p>'+
+ legalLinks('<a class="lk" href="'+jw+'" target="_blank" rel="noopener noreferrer"><span>ابحث عن «'+esc(a.t)+'» في JustWatch<br><small>يعرض المنصات المرخّصة حسب بلدك</small></span>'+ic("ext",18)+'</a>')+'</div></section>'+
+ '<section class="sec"><div class="panel"><div class="rate-row"><span>تقييمك</span><div class="stars" role="group" aria-label="تقييمك">'+stars(a.id)+'</div></div><p class="note">تقييمك محفوظ على جهازك. متوسط تقييم الجمهور يحتاج خادمًا.</p></div></section>'+
+ ad("بانر 320×100")+
+ comments(a.id);
+}
+
+/* ---------- العرض ---------- */
+var TABS=[["home","الرئيسية","home"],["search","بحث","search"],["cats","التصنيفات","grid"],["news","مقالات","news"],["favs","المفضلة","heart"]];
+function renderTabs(){
+ tabsEl.innerHTML=TABS.map(function(t){
+  var cur=(!S.open&&S.tab===t[0])?"page":"false";
+  return '<button data-tab="'+t[0]+'" aria-current="'+cur+'">'+ic(t[2],22)+'<span>'+t[1]+'</span></button>';
+ }).join("");
+}
+function render(){
+ var fn={home:home,search:search,cats:cats,news:news,favs:favs};
+ view.innerHTML=S.open?detail():fn[S.tab]();
+ renderTabs();
+ fillAds();
+}
+function go(tab,open){S.tab=tab;S.open=open||null;render();window.scrollTo(0,0);}
+
+/* ---------- أحداث ---------- */
+document.addEventListener("click",function(e){
+ var t=e.target.closest("[data-open],[data-tab],[data-back],[data-fav],[data-rate],[data-genre],[data-cat]");
+ if(!t)return;
+ if(t.hasAttribute("data-open")){S.open=parseInt(t.getAttribute("data-open"),10);render();window.scrollTo(0,0);return;}
+ if(t.hasAttribute("data-tab")){S.genre=(t.getAttribute("data-tab")==="search")?S.genre:null;go(t.getAttribute("data-tab"));if(t.getAttribute("data-tab")==="search")loadSearch();return;}
+ if(t.hasAttribute("data-back")){S.open=null;render();window.scrollTo(0,0);return;}
+ if(t.hasAttribute("data-cat")){S.genre=t.getAttribute("data-cat");S.q="";go("search");loadSearch();return;}
+ if(t.hasAttribute("data-genre")){S.genre=t.getAttribute("data-genre")||null;render();loadSearch();return;}
+ if(t.hasAttribute("data-fav")){
+  var i=S.favs.indexOf(S.open);
+  if(i>=0)S.favs.splice(i,1);else S.favs.push(S.open);
+  store.set("oa_favs",S.favs);store.set("oa_favitems",S.favs.map(byId).filter(function(a){return a&&a.remote;}));render();return;
+ }
+ if(t.hasAttribute("data-rate")){
+  var n=parseInt(t.getAttribute("data-rate"),10);
+  if(S.rates[S.open]===n)delete S.rates[S.open];else S.rates[S.open]=n;
+  store.set("oa_rate",S.rates);render();return;
+ }
+});
+document.addEventListener("input",function(e){
+ if(e.target&&e.target.id==="q"){S.q=e.target.value;refreshRes();clearTimeout(stimer);stimer=setTimeout(loadSearch,450);}
+});
+document.addEventListener("submit",function(e){
+ if(e.target&&e.target.id==="cform"){
+  e.preventDefault();
+  var n=document.getElementById("cn").value.trim(), t=document.getElementById("ct").value.trim();
+  if(!n||!t)return;
+  S.name=n;store.set("oa_name",n);
+  var d=new Date(), ds=d.toLocaleDateString("ar-EG",{day:"numeric",month:"short"});
+  (S.coms[S.open]=S.coms[S.open]||[]).unshift({n:n,t:t,d:ds});
+  store.set("oa_com",S.coms);render();
+ }
+});
+
+render();
+loadHome();
+})();
+
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}
+</script></body></html>
